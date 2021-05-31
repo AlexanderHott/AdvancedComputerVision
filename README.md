@@ -4,7 +4,7 @@
 
 You will need three modules
 
-  ```pip install openvc-python```  
+  ```pip install opencv-python```  
   ```pip install mediapipe```  
   ```pip install numpy```  
 

@@ -20,4 +20,4 @@ INFO: Replacing 64 node(s) with delegate (TfLiteXNNPackDelegate) node, yielding 
 ```
 this means the program worked correctly but you might need to change the webcam id.
 
-Simply change the 0 in the line `cap = cv2.VideoCapture(0)` to a 1. Sadly opencv-python does not have an easy way of finding all the connected video devices so there might be some trial and error.
+Simply change the 0 in the line `cap = cv2.VideoCapture(0)` to a 1. Sadly opencv-python does not have an easy way of finding all the connected video devices so there might be some trial and error if 0 and 1 don't word.

@@ -1,7 +1,7 @@
 import cv2
 import time
 import numpy as np
-from HandTrackingModule import handDetector
+from HandTrackingModule import HandDetector
 from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
@@ -13,11 +13,10 @@ cap.set(3, WCAM)
 cap.set(4, HCAM)
 pTime = 0
 
-detector = handDetector(maxHands=1, detectionCon=0.7)
+detector = HandDetector(maxHands=1, detectionCon=0.7)
 
 devices = AudioUtilities.GetSpeakers()
-interface = devices.Activate(
-    IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
+interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
 volume = cast(interface, POINTER(IAudioEndpointVolume))
 # volume.GetMute()
 # volume.GetMasterVolumeLevel()
@@ -52,6 +51,8 @@ while True:
     fps = 1 / (cTime - pTime)
     pTime = cTime
 
-    cv2.putText(img, f"FPS: {int(fps)}", (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
+    cv2.putText(
+        img, f"FPS: {int(fps)}", (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3
+    )
     cv2.imshow("Image", img)
     cv2.waitKey(1)

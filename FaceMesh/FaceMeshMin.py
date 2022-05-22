@@ -2,7 +2,8 @@ import cv2
 import mediapipe as mp
 import time
 
-cap = cv2.VideoCapture('videos/video-1.mp4')
+# cap = cv2.VideoCapture("videos/video-1.mp4")
+cap = cv2.VideoCapture(0)
 pTime = 0
 
 mpDraw = mp.solutions.drawing_utils
@@ -20,7 +21,9 @@ while True:
             mpDraw.draw_landmarks(img, faceLms, mpFaceMesh.FACE_CONNECTIONS)
 
     cTime = time.time()
-    fps = 1/(cTime - pTime)
+    fps = 1 / (cTime - pTime)
     pTime = cTime
-    cv2.putText(img, f"FPS: {int(fps)}", (20, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 3)
+    cv2.putText(
+        img, f"FPS: {int(fps)}", (20, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 3
+    )
     cv2.imshow("Image", img)

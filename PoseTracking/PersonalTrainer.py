@@ -19,7 +19,7 @@ while True:
 
     if lmList:
         # detector.findAngle(img, 11, 13, 15)     # Left arm
-        angle = detector.findAngle(img, 12, 14, 16)     # Right arm
+        angle = detector.findAngle(img, 12, 14, 16)  # Right arm
 
         percent = np.interp(angle, (210, 310), (0, 100))
         bar = np.interp(angle, (210, 310), (650, 110))
@@ -35,9 +35,25 @@ while True:
 
         cv2.rectangle(img, (1100, 100), (1175, 650), (0, 255, 0), 3)
         cv2.rectangle(img, (1100, int(bar)), (1175, 650), (0, 255, 0), cv2.FILLED)
-        cv2.putText(img, f"{int(percent)}%", (1100, 650), cv2.FONT_HERSHEY_PLAIN, 4, (255, 0, 0), 4)
+        cv2.putText(
+            img,
+            f"{int(percent)}%",
+            (1100, 650),
+            cv2.FONT_HERSHEY_PLAIN,
+            4,
+            (255, 0, 0),
+            4,
+        )
 
-        cv2.putText(img, f"curls: {math.floor(count)}", (50, 100), cv2.FONT_HERSHEY_PLAIN, 5, (255, 0, 0), 5)
+        cv2.putText(
+            img,
+            f"curls: {math.floor(count)}",
+            (50, 100),
+            cv2.FONT_HERSHEY_PLAIN,
+            5,
+            (255, 0, 0),
+            5,
+        )
 
     cv2.imshow("Image", img)
     cv2.waitKey(1)

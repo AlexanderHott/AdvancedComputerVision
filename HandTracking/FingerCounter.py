@@ -1,6 +1,6 @@
 import cv2
 import time
-from HandTrackingModule import handDetector
+from HandTrackingModule import HandDetector
 
 WCAM, HCAM = 640, 480
 
@@ -9,7 +9,7 @@ cap.set(3, WCAM)
 cap.set(4, HCAM)
 pTime = 0
 
-detector = handDetector(maxHands=1, detectionCon=0.75)
+detector = HandDetector(maxHands=1, detectionCon=0.75)
 
 while True:
     success, img = cap.read()
@@ -18,7 +18,11 @@ while True:
     fingers = [0, 0, 0, 0, 0]
 
     if lmList:
-        y0, y1, y2 = lmList[17][2], lmList[4][2], lmList[3][2]  # pinky base, thumb fingertip, thumb lower
+        y0, y1, y2 = (
+            lmList[17][2],
+            lmList[4][2],
+            lmList[3][2],
+        )  # pinky base, thumb fingertip, thumb lower
         if abs(y1 - y0) > abs(y2 - y0):
             fingers[0] = 1
 
@@ -38,13 +42,23 @@ while True:
         if y10 > y9:
             fingers[4] = 1
 
-    cv2.putText(img, f"Fingers: {fingers}", (10, 120), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
+    cv2.putText(
+        img,
+        f"Fingers: {fingers}",
+        (10, 120),
+        cv2.FONT_HERSHEY_PLAIN,
+        3,
+        (255, 0, 255),
+        3,
+    )
 
     cTime = time.time()
     fps = 1 / (cTime - pTime)
     pTime = cTime
 
-    cv2.putText(img, f"FPS: {int(fps)}", (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
+    cv2.putText(
+        img, f"FPS: {int(fps)}", (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3
+    )
 
     cv2.imshow("Image", img)
     cv2.waitKey(1)

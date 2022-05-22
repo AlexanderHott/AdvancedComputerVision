@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import time
 import os
-from HandTrackingModule import handDetector
+from HandTrackingModule import HandDetector
 
 folderPath = "images/"
 imgList = os.listdir(folderPath)
@@ -23,7 +23,7 @@ cap = cv2.VideoCapture(0)
 cap.set(3, 1280)
 cap.set(4, 720)
 
-detector = handDetector(maxHands=1, detectionCon=0.8)
+detector = HandDetector(maxHands=1, detectionCon=0.8)
 
 while True:
     success, img = cap.read()
